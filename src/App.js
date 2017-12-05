@@ -7,10 +7,11 @@ class App extends Component {
   }
 
   incrementClicked = () => {
-    console.log("Clicky clicky")
-    this.setState(prevState => ({
-      clicked: ++prevState.clicked
-    }))
+    const newTotalClicks = this.state.clicked + 1
+    this.setState({
+      clicked: newTotalClicks
+    })
+    localStorage.setItem("clicked", newTotalClicks)
   }
 
   render() {
@@ -20,6 +21,13 @@ class App extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.setState({
+      clicked: parseInt(localStorage.getItem("clicked"), 10)
+    })
+  }
+
 }
 
 export default App;
